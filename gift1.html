@@ -42,9 +42,9 @@
       margin-top: 20px;
       border: 2px solid #f3b4d5;
       border-radius: 15px;
-      opacity: 0; /* Initially hide the images */
-      transform: translateX(-100%); /* Start off-screen */
-      transition: opacity 1s, transform 3s ease-out; /* Smooth transition */
+      opacity: 0;
+      transform: translateX(-100%);
+      transition: opacity 1s, transform 3s ease-out;
     }
 
     .fun-text {
@@ -52,7 +52,6 @@
       margin: 20px 0;
     }
 
-    /* Balloon animation styles */
     #balloon-container {
       height: 100vh;
       padding: 1em;
@@ -116,7 +115,6 @@
       font-weight: bold;
     }
 
-    /* Center the GIF */
     .gif-container {
       position: relative;
       width: 100%;
@@ -129,10 +127,13 @@
       cursor: pointer;
     }
 
-    /* Music Player */
     .music-player {
       margin-top: 30px;
       text-align: center;
+    }
+
+    #playButton {
+      display: none;
     }
   </style>
 </head>
@@ -145,29 +146,28 @@
 
   <div class="content">
     <div class="gif-container">
-      <!-- Centered GIF -->
       <img src="https://media3.giphy.com/media/UYeF1OEEsJ7tDAb0nx/200.webp?cid=ecf05e4789cy1mhh6nhd07flve75mjsh63u7w652kzp6d771&ep=v1_gifs_search&rid=200.webp&ct=g" alt="Memory GIF" id="memory-gif">
     </div>
 
     <div class="memory-imgs-container">
-      <img src="/Users/sam22ridhi/Desktop/devika/devika/1.jpeg" class="memory-img">
-      <img src="/Users/sam22ridhi/Desktop/devika/devika/2.jpeg"  class="memory-img">
-      <img src="/Users/sam22ridhi/Desktop/devika/devika/3.jpeg"  class="memory-img">
-      <img src="/Users/sam22ridhi/Desktop/devika/devika/4.jpeg"  class="memory-img">
-      <img src="/Users/sam22ridhi/Desktop/devika/devika/5.jpeg"  class="memory-img">
-      <img src="/Users/sam22ridhi/Desktop/devika/devika/6.jpeg"  class="memory-img">
-      <img src="/Users/sam22ridhi/Desktop/devika/devika/7.jpeg"  class="memory-img">
-      <img src="/Users/sam22ridhi/Desktop/devika/devika/8.jpeg"  class="memory-img">
-      <img src="/Users/sam22ridhi/Desktop/devika/devika/9.jpeg" class="memory-img">
-      <img src="/Users/sam22ridhi/Desktop/devika/devika/10.jpeg" class="memory-img">
-      <img src="/Users/sam22ridhi/Desktop/devika/devika/11.jpeg" class="memory-img">
+      <img src="1.jpeg" class="memory-img">
+      <img src="2.jpeg"  class="memory-img">
+      <img src="3.jpeg"  class="memory-img">
+      <img src="4.jpeg"  class="memory-img">
+      <img src="5.jpeg"  class="memory-img">
+      <img src="6.jpeg"  class="memory-img">
+      <img src="7.jpeg"  class="memory-img">
+      <img src="8.jpeg"  class="memory-img">
+      <img src="9.jpeg" class="memory-img">
+      <img src="10.jpeg" class="memory-img">
+      <img src="11.jpeg" class="memory-img">
+      <img src="24.jpeg" class="memory-img">
     </div>
 
-    <p class="fun-text">"Darling dont you ever grow up "</p>
+    <p class="fun-text">"Darling dont you ever grow up"</p>
 
-    <!-- Removed audio controls but kept autoplay and loop -->
-    <audio id="music-player" autoplay loop>
-      <source src="/Users/sam22ridhi/Desktop/devika/devika/Never_Grow_Up-484806.mp3" type="audio/mp3">
+    <audio id="music-player" loop>
+      <source src="Never_Grow_Up-484806.mp3" type="audio/mp3">
       Your browser does not support the audio element.
     </audio>
 
@@ -175,72 +175,70 @@
   </div>
 
   <script>
-    const balloonContainer = document.getElementById("balloon-container");
-    const memoryGif = document.getElementById("memory-gif");
-    const memoryImgs = document.querySelectorAll('.memory-imgs-container img');
-    let currentImageIndex = 0;
+    document.addEventListener('DOMContentLoaded', () => {
+      const balloonContainer = document.getElementById("balloon-container");
+      const memoryGif = document.getElementById("memory-gif");
+      const memoryImgs = document.querySelectorAll('.memory-imgs-container img');
+      const audioPlayer = document.getElementById("music-player");
 
-    function random(num) {
-      return Math.floor(Math.random() * num);
-    }
-
-    function getRandomStyles() {
-      var r = random(255);
-      var g = random(255);
-      var b = random(255);
-      var mt = random(200);
-      var ml = random(50);
-      var dur = random(5) + 5;
-      return `
-      background-color: rgba(${r},${g},${b},0.7);
-      color: rgba(${r},${g},${b},0.7); 
-      box-shadow: inset -7px -3px 10px rgba(${r - 10},${g - 10},${b - 10},0.7);
-      margin: ${mt}px 0 0 ${ml}px;
-      animation: float ${dur}s ease-in infinite
-      `;
-    }
-
-    function createBalloons(num) {
-      for (var i = num; i > 0; i--) {
-        var balloon = document.createElement("div");
-        balloon.className = "balloon";
-        balloon.style.cssText = getRandomStyles();
-        balloonContainer.append(balloon);
+      function random(num) {
+        return Math.floor(Math.random() * num);
       }
-    }
 
-    function removeBalloons() {
-      balloonContainer.style.opacity = 0;
-      setTimeout(() => {
-        balloonContainer.remove();
-      }, 500);
-    }
+      function getRandomStyles() {
+        var r = random(255);
+        var g = random(255);
+        var b = random(255);
+        var mt = random(200);
+        var ml = random(50);
+        var dur = random(5) + 5;
+        return `
+        background-color: rgba(${r},${g},${b},0.7);
+        color: rgba(${r},${g},${b},0.7); 
+        box-shadow: inset -7px -3px 10px rgba(${r - 10},${g - 10},${b - 10},0.7);
+        margin: ${mt}px 0 0 ${ml}px;
+        animation: float ${dur}s ease-in infinite
+        `;
+      }
 
-    // Display memory images on GIF click and animate them
-    memoryGif.addEventListener('click', () => {
-      createBalloons(30);
-      memoryImgs.forEach((img, index) => {
+      function createBalloons(num) {
+        for (var i = num; i > 0; i--) {
+          var balloon = document.createElement("div");
+          balloon.className = "balloon";
+          balloon.style.cssText = getRandomStyles();
+          balloonContainer.append(balloon);
+        }
+      }
+
+      // GIF click event to play music and show images
+      memoryGif.addEventListener('click', () => {
+        // Play music
+        audioPlayer.play().catch(error => {
+          console.log('Music playback prevented:', error);
+        });
+
+        // Create balloons
+        createBalloons(30);
+
+        // Show memory images
+        memoryImgs.forEach((img, index) => {
+          setTimeout(() => {
+            img.style.opacity = 1;
+            img.style.transform = 'translateX(0)';
+          }, index * 1000);
+        });
+
+        // Hide memory images after display
         setTimeout(() => {
-          img.style.opacity = 1; // Show the image
-          img.style.transform = 'translateX(0)'; // Bring image to the center
-        }, index * 1000); // Stagger the animations
+          memoryImgs.forEach(img => {
+            img.style.opacity = 0;
+            img.style.transform = 'translateX(-100%)';
+          });
+        }, memoryImgs.length * 1000);
       });
 
-      // Reset all images back to their original position
-      setTimeout(() => {
-        memoryImgs.forEach(img => {
-          img.style.opacity = 0;
-          img.style.transform = 'translateX(-100%)'; // Reset to off-screen position
-        });
-      }, memoryImgs.length * 1000); // After all images have been shown
-    });
-
-    window.addEventListener("load", () => {
+      // Initial balloon creation
       createBalloons(30);
-    });
-
-    window.addEventListener("click", () => {
-      removeBalloons();
     });
   </script>
 </body>
